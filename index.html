@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEPENDENT FOOD COMPANY · CAREERS</title>
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Theme color for browser UI -->
+    <meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#e4e4e7" media="(prefers-color-scheme: light)">
+    <!-- iOS / Safari -->
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <!-- Fonts and styles (unchanged) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- Your existing styles (keep exactly as before) ---------- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Light theme (default) */
+        body.light {
+            background: #e4e4e7;
+            color: #1e1e1e;
+        }
+        body.light .main-card {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+        body.light .glass-card {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        body.light .contact-details a,
+        body.light .address,
+        body.light .website-link,
+        body.light .email-link,
+        body.light .section-title,
+        body.light .social-handle {
+            color: #1e1e1e;
+        }
+        body.light .social-name {
+            color: #5a5a5a;
+        }
+        body.light .footer-cta {
+            background: #1e1e1e;
+            color: white;
+        }
+        body.light .skyline-bg {
+            opacity: 0.25;
+            mix-blend-mode: multiply;
+        }
+        body.light .animated-bg {
+            background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.02) 0%, transparent 35%),
+                        radial-gradient(circle at 80% 70%, rgba(0,0,0,0.02) 0%, transparent 40%);
+        }
+        /* Dark theme */
+        body.dark {
+            background: #0f0f12;
+            color: #f0f0f0;
+        }
+        body.dark .main-card {
+            background: rgba(20,20,25,0.95);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        body.dark .glass-card {
+            background: #1e1e24;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        body.dark .contact-details a,
+        body.dark .address,
+        body.dark .website-link,
+        body.dark .email-link,
+        body.dark .section-title,
+        body.dark .social-handle {
+            color: #f0f0f0;
+        }
+        body.dark .contact-details a:hover,
+        body.dark .website-link:hover,
+        body.dark .email-link:hover {
+            color: #ffffff;
+        }
+        body.dark .contact-details a::after {
+            background: #ffffff;
+        }
+        body.dark .social-name {
+            color: #a0a0a0;
+        }
+        body.dark .footer-cta {
+            background: #0a0a0c;
+            color: #f0f0f0;
+        }
+        body.dark .skyline-bg {
+            opacity: 0.4;
+            mix-blend-mode: screen;
+            filter: invert(1) brightness(0.8);
+        }
+        body.dark .animated-bg {
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.03) 0%, transparent 35%),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 40%);
+        }
+        body.dark .hero-container {
+            background: linear-gradient(125deg, #2a2a35, #1a1a22);
+        }
+        body.dark .hero-container .brand-name-line1,
+        body.dark .hero-container .brand-name-line2,
+        body.dark .hero-container .brand-name-line3 {
+            color: #ffffff;
+        }
+        body.dark .hero-container .brand-subtitle {
+            color: #cccccc;
+        }
+        body.dark .language-toggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        body.dark .lang-btn {
+            color: rgba(255,255,255,0.7);
+        }
+        body.dark .lang-btn:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        body.dark .lang-btn.active {
+            background: white;
+            color: #0f0f12;
+        }
+        .animated-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            animation: bgWander 22s infinite alternate ease-in-out;
+        }
+        @keyframes bgWander {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            100% { transform: scale(1.05) rotate(0.5deg); opacity: 0.8; }
+        }
+        .floating-brands {
+            position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: -1;
+        }
+        .floating-brand {
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600; font-size: 54px;
+            color: rgba(0,0,0,0.03);
+            white-space: nowrap;
+            animation: drift 28s infinite linear;
+        }
+        body.dark .floating-brand {
+            color: rgba(255,255,255,0.03);
+        }
+        @keyframes drift {
+            0% { transform: translateY(120vh) translateX(-120px) rotate(-12deg); opacity: 0; }
+            10% { opacity: 0.08; }
+            90% { opacity: 0.06; }
+            100% { transform: translateY(-140px) translateX(140px) rotate(12deg); opacity: 0; }
+        }
+        .container { width: 100%; max-width: 1300px; margin: 0 auto; }
+        .navbar { position: relative; z-index: 100; margin-bottom: 30px; }
+        .nav-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+        }
+        .language-toggle {
+            background: rgba(0,0,0,0.06); backdrop-filter: blur(15px);
+            border-radius: 40px; padding: 6px; border: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+        }
+        .lang-btn {
+            padding: 10px 28px; background: transparent; border: none; border-radius: 30px;
+            font-weight: 600; font-size: 15px; color: rgba(0,0,0,0.7); cursor: pointer;
+            transition: 0.3s;
+        }
+        .lang-btn:hover { background: rgba(0,0,0,0.05); }
+        .lang-btn.active { background: #1e1e1e; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .theme-toggle {
+            background: rgba(0,0,0,0.06); backdrop-filter: blur(15px);
+            border-radius: 40px; padding: 6px; border: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+        }
+        .theme-btn {
+            padding: 10px 18px; background: transparent; border: none; border-radius: 30px;
+            font-weight: 600; font-size: 15px; color: rgba(0,0,0,0.7); cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .theme-btn:hover { background: rgba(0,0,0,0.05); }
+        .theme-btn.active {
+            background: #1e1e1e; color: white;
+        }
+        body.dark .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        body.dark .theme-btn {
+            color: rgba(255,255,255,0.7);
+        }
+        body.dark .theme-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        body.dark .theme-btn.active {
+            background: white;
+            color: #0f0f12;
+        }
+        .main-card {
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-radius: 42px; overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            position: relative;
+        }
+        .skyline-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 380px;
+            pointer-events: none; z-index: 1;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%),
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 300" preserveAspectRatio="none"><path fill="%23000" d="M0,300 L0,160 L35,185 L70,135 L110,175 L150,120 L200,155 L250,100 L310,140 L370,90 L440,135 L500,100 L570,145 L630,110 L700,150 L760,115 L820,155 L890,125 L960,170 L1030,140 L1110,190 L1180,165 L1250,210 L1330,180 L1400,220 L1400,300 Z" opacity="0.5"/><path fill="%23000" d="M0,300 L0,200 L40,225 L80,185 L130,220 L180,170 L240,205 L300,160 L370,200 L430,155 L500,190 L560,150 L630,190 L700,155 L770,195 L840,160 L910,200 L980,170 L1060,210 L1130,180 L1210,225 L1290,200 L1370,245 L1400,230 L1400,300 Z" opacity="0.4"/></svg>') no-repeat bottom center;
+            background-size: cover;
+        }
+        .header { padding: 80px 60px 30px; text-align: center; position: relative; z-index: 5; }
+        .header h1 {
+            font-family: 'Montserrat', sans-serif; font-size: 5.5rem; font-weight: 900;
+            letter-spacing: -1px; line-height: 1; margin-bottom: 20px;
+        }
+        .header p {
+            font-size: 1.8rem; max-width: 750px; margin: 0 auto;
+        }
+        .hero-section { padding: 0 60px 40px; position: relative; z-index: 5; }
+        .hero-container {
+            background: linear-gradient(125deg, #f0f0f0, #ffffff);
+            border-radius: 32px; overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); position: relative;
+            transition: transform 0.5s cubic-bezier(0.2,0.9,0.3,1);
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .hero-container:hover { transform: scale(1.01) translateY(-3px); }
+        .skyline-text { position: relative; z-index: 2; text-align: center; padding: 20px; }
+        .brand-name-line1 {
+            font-family: 'Montserrat', sans-serif; font-size: 5.2rem; font-weight: 900;
+            letter-spacing: 4px; line-height: 1.2;
+        }
+        .brand-name-line2 {
+            font-family: 'Montserrat', sans-serif; font-size: 6rem; font-weight: 900;
+            letter-spacing: 6px; line-height: 1; margin-top: -10px;
+        }
+        .brand-name-line3 {
+            font-family: 'Montserrat', sans-serif; font-size: 4rem; font-weight: 900;
+            letter-spacing: 5px; line-height: 1.2; margin-top: -5px;
+        }
+        .brand-subtitle {
+            font-size: 1.7rem; margin-top: 20px; letter-spacing: 2px;
+        }
+        .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; padding: 0 60px 40px; position: relative; z-index: 5; }
+        .glass-card {
+            backdrop-filter: blur(20px); border-radius: 28px;
+            padding: 40px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.2,0.9,0.3,1); overflow: hidden;
+            position: relative;
+        }
+        .glass-card:hover { transform: translateY(-4px); box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15); }
+        .contact-info { display: flex; flex-direction: column; gap: 28px; }
+        .contact-item { display: flex; align-items: center; gap: 20px; }
+        .contact-icon {
+            width: 60px; height: 60px; background: #1e1e1e; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700; font-size: 22px; flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s;
+        }
+        body.dark .contact-icon {
+            background: #f0f0f0;
+            color: #1e1e1e;
+        }
+        .contact-item:hover .contact-icon { transform: scale(1.02); }
+        .contact-details a {
+            display: block; font-size: 1.65rem; font-weight: 700;
+            text-decoration: none; margin-bottom: 5px; transition: 0.2s;
+            position: relative; padding-bottom: 3px;
+        }
+        .contact-details a:hover { transform: translateX(3px); }
+        .contact-details a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            transition: width 0.25s;
+        }
+        .contact-details a:hover::after { width: 100%; }
+        .address { font-size: 1.9rem; font-weight: 600; line-height: 1.6; }
+        .center-links { padding: 20px 60px 40px; text-align: center; position: relative; z-index: 5; }
+        .website-link {
+            font-size: 2.8rem; font-weight: 800; text-decoration: none;
+            border-bottom: 2px solid transparent; transition: 0.3s; display: inline-block;
+        }
+        .website-link:hover { border-bottom-color: currentColor; }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2), transparent); margin: 35px auto; width: 60%; }
+        body.dark .divider { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
+        .email-link { font-size: 2.5rem; font-weight: 700; text-decoration: none; transition: 0.3s; display: inline-block; }
+        .social-section { padding: 0 60px 50px; }
+        .section-title { text-align: center; font-family: 'Montserrat', sans-serif; font-size: 2.6rem; font-weight: 800; margin-bottom: 40px; }
+        .social-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+        }
+        .social-card {
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(16px); border-radius: 24px;
+            padding: 30px 20px; text-decoration: none; border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.2,0.9,0.3,1); text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            position: relative; overflow: hidden;
+        }
+        body.dark .social-card {
+            background: rgba(30,30,36,0.9);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .social-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: transparent;
+        }
+        .social-handle { font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; }
+        .social-name { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .social-card[data-brand="independent"]:hover { box-shadow: 0 20px 35px -6px #d4af37; }
+        .social-card[data-brand="salt"]:hover { box-shadow: 0 20px 35px -6px #6ab0fe; }
+        .social-card[data-brand="parkers"]:hover { box-shadow: 0 20px 35px -6px #2e7d32; }
+        .social-card[data-brand="public"]:hover { box-shadow: 0 20px 35px -6px #f57c00; }
+        .social-card[data-brand="somewhere"]:hover { box-shadow: 0 20px 35px -6px #008080; }
+        .social-card[data-brand="shalwa"]:hover { box-shadow: 0 20px 35px -6px #9c27b0; }
+        .social-card[data-brand="kumo"]:hover { box-shadow: 0 20px 35px -6px #d32f2f; }
+        .social-card[data-brand="mshakal"]:hover { box-shadow: 0 20px 35px -6px #e91e63; }
+        .social-card[data-brand="treats"]:hover { box-shadow: 0 20px 35px -6px #fbc02d; }
+        .social-card[data-brand="grind"]:hover { box-shadow: 0 20px 35px -6px #795548; }
+        .footer-cta {
+            padding: 50px 70px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative; z-index: 5;
+        }
+        .cta-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .cta-left { display: flex; align-items: center; gap: 25px; }
+        .camera-icon {
+            width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 22px;
+            display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px); transition: 0.3s;
+        }
+        .camera-icon:hover { transform: rotate(5deg) scale(1.05); background: rgba(255,255,255,0.2); }
+        .cta-text { font-size: 2rem; font-weight: 600; }
+        .signature { font-family: 'Cormorant Garamond', serif; font-size: 3.4rem; font-weight: 600; color: rgba(255,255,255,0.8); letter-spacing: 3px; }
+        @media (max-width: 1100px) {
+            .header h1 { font-size: 4.5rem; }
+            .social-grid { grid-template-columns: repeat(3,1fr); }
+            .brand-name-line1 { font-size: 4.5rem; }
+            .brand-name-line2 { font-size: 5rem; }
+            .brand-name-line3 { font-size: 3.5rem; }
+        }
+        @media (max-width: 850px) {
+            .header h1 { font-size: 3.8rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .social-grid { grid-template-columns: repeat(2,1fr); }
+            .footer-cta { padding: 40px 30px; }
+            .brand-name-line1 { font-size: 3.8rem; }
+            .brand-name-line2 { font-size: 4.2rem; }
+            .brand-name-line3 { font-size: 3rem; }
+        }
+        @media (max-width: 600px) {
+            .header { padding: 40px 20px; }
+            .hero-section { padding: 0 20px; }
+            .cards-grid { padding: 0 20px; }
+            .center-links { padding: 10px 20px; }
+            .social-section { padding: 0 20px 30px; }
+            .social-grid { grid-template-columns: 1fr; }
+            .brand-name-line1 { font-size: 2.8rem; letter-spacing: 3px; }
+            .brand-name-line2 { font-size: 3.2rem; letter-spacing: 4px; }
+            .brand-name-line3 { font-size: 2.2rem; }
+            .cta-content { flex-direction: column; gap: 30px; text-align: center; }
+            .skyline-bg { height: 450px; }
+        }
+    </style>
+</head>
+<body class="light">
+    <!-- Floating brands (unchanged) -->
+    <div class="animated-bg"></div>
+    <div class="floating-brands">
+        <div class="floating-brand" style="top: 5%; left: 2%;">SALT</div>
+        <div class="floating-brand" style="top: 15%; right: 5%; animation-delay: -2s;">SOMEWHERE</div>
+        <div class="floating-brand" style="top: 30%; left: 10%; animation-delay: -5s;">PARKERS</div>
+        <div class="floating-brand" style="top: 50%; right: 15%; animation-delay: -8s;">PUBLIC</div>
+        <div class="floating-brand" style="top: 70%; left: 20%; animation-delay: -11s;">SHALWA</div>
+        <div class="floating-brand" style="top: 40%; right: 25%; animation-delay: -14s;">SOIL</div>
+        <div class="floating-brand" style="top: 60%; left: 30%; animation-delay: -17s;">GRIND</div>
+        <div class="floating-brand" style="top: 75%; right: 30%; animation-delay: -20s;">KUMO</div>
+        <div class="floating-brand" style="top: 25%; left: 40%; animation-delay: -23s;">TREATS</div>
+        <div class="floating-brand" style="top: 80%; left: 50%; animation-delay: -26s;">MSHAKAL</div>
+        <div class="floating-brand" style="top: 45%; right: 45%; animation-delay: -29s;">INDEPENDENT</div>
+    </div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="language-toggle">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="ar">AR</button>
+                </div>
+                <div class="theme-toggle">
+                    <button class="theme-btn active" data-theme="light">☀️ Light</button>
+                    <button class="theme-btn" data-theme="dark">🌙 Dark</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-card">
+            <div class="skyline-bg"></div>
+
+            <header class="header">
+                <h1 id="mainTitle">CAREER OPPORTUNITIES</h1>
+                <p id="subtitle">Join our team and build your future with Dubai's leading hospitality group</p>
+            </header>
+
+            <section class="hero-section">
+                <div class="hero-container">
+                    <div class="skyline-text">
+                        <div class="brand-name-line1">INDEPENDENT</div>
+                        <div class="brand-name-line2">FOOD</div>
+                        <div class="brand-name-line3">COMPANY</div>
+                        <div class="brand-subtitle">UNITED ARAB EMIRATES</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cards-grid">
+                <div class="glass-card">
+                    <div class="contact-info">
+                        <div class="contact-item"><div class="contact-icon">O</div><div class="contact-details"><a href="tel:+97144579990">+971 4 457 9990</a><div style="color:#5a5a5a;">Office Line</div></div></div>
+                        <div class="contact-item"><div class="contact-icon">M</div><div class="contact-details"><a href="tel:+971501563188">+971 50 1563188</a><div style="color:#5a5a5a;">Mobile</div></div></div>
+                        <div class="contact-item"><div class="contact-icon">E</div><div class="contact-details"><a href="mailto:Talent@indpt.com">Talent@indpt.com</a><div style="color:#5a5a5a;">Recruitment</div></div></div>
+                    </div>
+                </div>
+                <div class="glass-card address-card">
+                    <div class="address" id="address">
+                        <div class="address-line">Suite 2602</div><div class="address-line">Tameem House</div>
+                        <div class="address-line">TECOM C, Dubai</div><div class="address-line">United Arab Emirates</div>
+                        <div class="address-line" style="margin-top:12px;">PO Box: 32927</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="center-links">
+                <a href="https://www.indpt.com" target="_blank" class="website-link" id="websiteLink">www.indpt.com</a>
+                <div class="divider"></div>
+                <a href="mailto:dana@indpt.com" class="email-link" id="emailLink">dana@indpt.com</a>
+            </section>
+
+            <section class="social-section">
+                <h2 class="section-title" id="socialTitle">Our Brands</h2>
+                <div class="social-grid">
+                    <a href="https://instagram.com/independent" target="_blank" class="social-card" data-brand="independent"><div class="social-handle">@independent</div><div class="social-name" id="groupText">Group</div></a>
+                    <a href="https://instagram.com/findsalt" target="_blank" class="social-card" data-brand="salt"><div class="social-handle">@findsalt</div><div class="social-name">Salt</div></a>
+                    <a href="https://instagram.com/parkers" target="_blank" class="social-card" data-brand="parkers"><div class="social-handle">@parkers</div><div class="social-name">Parkers</div></a>
+                    <a href="https://instagram.com/public" target="_blank" class="social-card" data-brand="public"><div class="social-handle">@public</div><div class="social-name">Public</div></a>
+                    <a href="https://instagram.com/somewhere" target="_blank" class="social-card" data-brand="somewhere"><div class="social-handle">@somewhere</div><div class="social-name">Somewhere</div></a>
+                    <a href="https://instagram.com/shalwa.eatery" target="_blank" class="social-card" data-brand="shalwa"><div class="social-handle">@shalwa.eatery</div><div class="social-name">Shalwa</div></a>
+                    <a href="https://instagram.com/kumo.uae" target="_blank" class="social-card" data-brand="kumo"><div class="social-handle">@kumo.uae</div><div class="social-name">Kumo</div></a>
+                    <a href="https://instagram.com/mshakal.ae" target="_blank" class="social-card" data-brand="mshakal"><div class="social-handle">@mshakal.ae</div><div class="social-name">Mshakal</div></a>
+                    <a href="https://instagram.com/treatsbyindpt" target="_blank" class="social-card" data-brand="treats"><div class="social-handle">@treatsbyindpt</div><div class="social-name">Treats</div></a>
+                    <a href="https://instagram.com/grindroastery" target="_blank" class="social-card" data-brand="grind"><div class="social-handle">@grindroastery</div><div class="social-name">Grind</div></a>
+                </div>
+            </section>
+
+            <footer class="footer-cta">
+                <div class="cta-content">
+                    <div class="cta-left">
+                        <div class="camera-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+                        <div class="cta-text" id="ctaText">Snap · Attach CV · Apply</div>
+                    </div>
+                    <div class="signature">lm</div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Translation and theme script (unchanged) -->
+    <script>
+        const translations = {
+            en: {
+                mainTitle: "CAREER OPPORTUNITIES",
+                subtitle: "Join our team and build your future with Dubai's leading hospitality group.",
+                address: `<div class="address-line">Suite 2602</div><div class="address-line">Tameem House</div><div class="address-line">TECOM C, Dubai</div><div class="address-line">United Arab Emirates</div><div class="address-line" style="margin-top:12px;">PO Box: 32927</div>`,
+                websiteLink: "www.indpt.com", emailLink: "dana@indpt.com",
+                socialTitle: "Our Brands", groupText: "Group",
+                ctaText: "Snap · Attach CV · Apply"
+            },
+            ar: {
+                mainTitle: "فرص عمل",
+                subtitle: "انضم إلى فريقنا وابنِ مستقبلك مع مجموعة الضيافة الرائدة في دبي",
+                address: `<div class="address-line">جناح 2602</div><div class="address-line">بيت تميم</div><div class="address-line">تيكوم C، دبي</div><div class="address-line">الإمارات العربية المتحدة</div><div class="address-line" style="margin-top:12px;">صندوق بريد: 32927</div>`,
+                websiteLink: "www.indpt.com", emailLink: "dana@indpt.com",
+                socialTitle: "علاماتنا التجارية", groupText: "المجموعة",
+                ctaText: "التقط صورة · أرسل سيرتك الذاتية · قدم الآن"
+            }
+        };
+
+        let currentLang = localStorage.getItem('language') || 'en';
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('mainTitle').textContent = t.mainTitle;
+            document.getElementById('subtitle').textContent = t.subtitle;
+            document.getElementById('address').innerHTML = t.address;
+            document.getElementById('websiteLink').textContent = t.websiteLink;
+            document.getElementById('emailLink').textContent = t.emailLink;
+            document.getElementById('socialTitle').textContent = t.socialTitle;
+            document.getElementById('groupText').textContent = t.groupText;
+            document.getElementById('ctaText').textContent = t.ctaText;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('language', lang);
+            currentLang = lang;
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLanguage(btn.dataset.lang)));
+
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const body = document.body;
+
+        function setTheme(theme) {
+            body.className = theme;
+            localStorage.setItem('theme', theme);
+            themeBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.theme === theme));
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => setTheme(btn.dataset.theme));
+        });
+
+        applyLanguage(currentLang);
+    </script>
+
+    <!-- Service worker registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.error('Service Worker registration failed', err));
+            });
+        }
+    </script>
+</body>
+</html>
